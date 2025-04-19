@@ -1,0 +1,21 @@
+-- Script SQL para criar o banco de dados do sistema
+
+CREATE TABLE IF NOT EXISTS users (
+  id UUID PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  username VARCHAR(100) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS projects (
+  id UUID PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  zip_code VARCHAR(8) NOT NULL,
+  cost NUMERIC(10, 2) NOT NULL,
+  done BOOLEAN DEFAULT FALSE,
+  deadline TIMESTAMP NOT NULL,
+  username VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
+);
